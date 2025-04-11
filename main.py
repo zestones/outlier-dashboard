@@ -8,71 +8,17 @@ from src.tabs.hours_analysis import display_hours_analysis_tab
 from src.tabs.overview import display_overview_tab
 from src.tabs.projects_details import projects_details_tab
 from src.tabs.raw_data import raw_data_tab
+from src.utils.styling import DashboardStyle
 
 # Set page configuration
 st.set_page_config(
     page_title="Work Analysis Dashboard",
     page_icon="📊",
     layout="wide",
-    initial_sidebar_state="expanded",
 )
 
-# Custom CSS for better UI
-st.markdown(
-    """
-<style>
-    .main {
-        padding: 1rem 1rem;
-    }
-    .stTabs [data-baseweb="tab-list"] {
-        gap: 10px;
-    }
-    .stTabs [data-baseweb="tab"] {
-        height: 50px;
-        white-space: pre-wrap;
-        background-color: #f0f2f6;
-        border-radius: 5px 5px 0px 0px;
-        gap: 1px;
-        padding-top: 10px;
-        padding-bottom: 10px;
-    }
-    .stTabs [aria-selected="true"] {
-        background-color: #4e8df5;
-        color: white;
-    }
-    .metric-card {
-        background-color: #f9f9f9;
-        border: 1px solid #eaeaea;
-        padding: 15px;
-        border-radius: 10px;
-        text-align: center;
-        box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
-    }
-    .metric-value {
-        font-size: 24px;
-        font-weight: bold;
-        margin-top: 10px;
-    }
-    .metric-title {
-        color: #555;
-        font-size: 14px;
-    }
-    hr {
-        margin-top: 1rem;
-        margin-bottom: 1rem;
-    }
-    .status-pending {
-        color: #FFA500;
-        font-weight: bold;
-    }
-    .status-processed {
-        color: #008000;
-        font-weight: bold;
-    }
-</style>
-""",
-    unsafe_allow_html=True,
-)
+# Apply theme using the DashboardStyle class
+theme = DashboardStyle.init_theme_selector()
 
 # Title of the app
 st.title("📊 Work Analytics Dashboard")
