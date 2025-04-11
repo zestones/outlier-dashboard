@@ -68,6 +68,97 @@ class DashboardStyle:
             button[kind="primary"]:hover {
                 transform: translateY(-2px);
             }
+            
+            /* Date selector styling */
+            .date-selector-container {
+                background: linear-gradient(90deg, rgba(45, 55, 75, 0.4) 0%, rgba(45, 55, 75, 0.2) 100%);
+                border-radius: 12px;
+                padding: 20px;
+                border: 1px solid rgba(80, 120, 200, 0.2);
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+                margin-bottom: 25px;
+            }
+            
+            .date-selector-header {
+                display: flex;
+                align-items: center;
+                margin-bottom: 15px;
+                border-bottom: 1px solid rgba(100, 120, 200, 0.2);
+                padding-bottom: 12px;
+            }
+            
+            .date-selector-title {
+                font-size: 1.1rem;
+                font-weight: 500;
+                color: #e6e6e6;
+                margin: 0;
+                display: flex;
+                align-items: center;
+            }
+            
+            .date-selector-title svg {
+                margin-right: 8px;
+                color: rgba(100, 150, 255, 0.9);
+            }
+            
+            .date-preset-grid {
+                display: grid;
+                grid-template-columns: repeat(5, 1fr);
+                gap: 10px;
+                margin-bottom: 18px;
+            }
+            
+            .date-preset-btn {
+                background: rgba(60, 70, 90, 0.4);
+                color: rgba(255, 255, 255, 0.9);
+                border: 1px solid rgba(80, 100, 180, 0.3);
+                border-radius: 6px;
+                padding: 8px 10px;
+                text-align: center;
+                font-size: 0.9rem;
+                font-weight: 500;
+                cursor: pointer;
+                transition: all 0.2s ease;
+            }
+            
+            .date-preset-btn:hover {
+                background: rgba(80, 110, 200, 0.3);
+                border-color: rgba(100, 140, 240, 0.5);
+                transform: translateY(-2px);
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+            }
+            
+            .date-preset-btn.active {
+                background: rgba(80, 120, 230, 0.4);
+                border-color: rgba(100, 150, 255, 0.6);
+                color: white;
+            }
+            
+            .date-input-container {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 15px;
+                margin-top: 15px;
+            }
+            
+            .date-input-label {
+                font-size: 0.9rem;
+                font-weight: 500;
+                color: rgba(255, 255, 255, 0.7);
+                margin-bottom: 5px;
+                display: block;
+            }
+            
+            .date-summary {
+                background: rgba(50, 60, 80, 0.3);
+                border-radius: 8px;
+                padding: 10px 15px;
+                margin-top: 15px;
+                font-size: 0.9rem;
+                display: flex;
+                justify-content: space-between;
+                border: 1px solid rgba(80, 100, 180, 0.15);
+            }
         """
 
         # Dark theme specific CSS
@@ -122,6 +213,25 @@ class DashboardStyle:
                 letter-spacing: 0.08em;
                 color: #bbb;
                 opacity: 0.8;
+            }
+            
+            .kpi-container {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 15px;
+                justify-content: space-between;
+                margin-bottom: 20px;
+            }
+            
+            .trend-indicator {
+                display: flex;
+                align-items: center;
+                margin-top: 5px;
+                font-size: 0.9rem;
+            }
+            
+            .trend-icon {
+                margin-right: 5px;
             }
             
             /* Status indicators */
@@ -195,6 +305,25 @@ class DashboardStyle:
                 background-color: rgba(17, 20, 28, 0.7);
                 border-right: 1px solid rgba(60, 65, 85, 0.3);
             }
+            
+            /* Date input styling for dark theme */
+            div[data-baseweb="calendar"] {
+                background-color: rgba(30, 34, 44, 0.95);
+                border-color: rgba(80, 100, 180, 0.3);
+            }
+            
+            div[data-baseweb="calendar"] button {
+                color: rgba(255, 255, 255, 0.8);
+            }
+            
+            div[data-baseweb="calendar"] button:hover {
+                background-color: rgba(80, 120, 230, 0.3);
+            }
+            
+            div[data-baseweb="calendar"] button[aria-selected="true"] {
+                background-color: rgba(80, 120, 230, 0.5);
+                color: white;
+            }
         """
 
         # Always return dark theme CSS
@@ -234,3 +363,12 @@ class DashboardStyle:
             st.session_state.theme = selected_theme
 
         return selected_theme
+
+    @staticmethod
+    def calendar_icon():
+        """Return a calendar SVG icon for date selector"""
+        return """
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
+        </svg>
+        """

@@ -20,17 +20,20 @@ st.set_page_config(
 # Apply theme using the DashboardStyle class
 theme = DashboardStyle.init_theme_selector()
 
-# Title of the app
-st.title("📊 Work Analytics Dashboard")
-st.markdown(
-    "Upload your work data CSV file to analyze work hours, earnings, and performance metrics"
-)
+# Main title in the content area
+st.title("Work Analysis Dashboard")
+st.markdown("View and analyze your work hours, earnings, and performance metrics")
 
 
 def main():
-    # File upload widget
-    uploaded_file = st.file_uploader("Upload your work data CSV", type=["csv"])
+    # Create sidebar for file upload and controls
+    with st.sidebar:
+        st.header("Data Source")
+        st.markdown("Upload your work data to begin analysis")
+        # File upload widget in sidebar
+        uploaded_file = st.file_uploader("Upload your work data CSV", type=["csv"])
 
+    # Main content area
     if uploaded_file is not None:
         try:
             df = pd.read_csv(uploaded_file)
@@ -55,6 +58,7 @@ def main():
             # Tab 2: Hours Analysis
             with tabs[1]:
                 display_hours_analysis_tab(df)
+
             # Tab 3: Earnings Analysis
             with tabs[2]:
                 earnings_analysis_tab(df)
@@ -66,6 +70,7 @@ def main():
             # Tab 5: Calendar View
             with tabs[4]:
                 calendar_view_tab(df)
+
             # Tab 6: Raw Data
             with tabs[5]:
                 raw_data_tab(df)
@@ -73,6 +78,26 @@ def main():
         except Exception as e:
             st.error(f"Error processing the file: {str(e)}")
             st.write("Please make sure the uploaded file is in the correct format.")
+    else:
+        # Display instructions when no file is uploaded
+        st.info(
+            "👈 Please upload your Outlier CSV file from the sidebar to start the analysis"
+        )
+
+        # Optional: Add some placeholder content or sample visualizations
+        st.markdown(
+            """
+        ### Welcome to the Work Analysis Dashboard
+        
+        This dashboard helps you analyze your Outlier work data to gain insights into:
+        - Working hours patterns
+        - Earnings distribution
+        - Project performance metrics
+        - Time management analytics
+        
+        To begin, upload your Outlier CSV file containing work data in the sidebar.
+        """
+        )
 
 
 if __name__ == "__main__":
