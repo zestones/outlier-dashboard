@@ -64,8 +64,6 @@ def calendar_view_tab(df):
     # Convert seconds to hours
     daily_summary["hours"] = daily_summary["duration_seconds"] / 3600
 
-    # Add a modern container for the calendar
-
     # Create month title with modern design
     st.markdown(
         f"""
@@ -103,7 +101,7 @@ def calendar_view_tab(df):
     days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
 
     # Use a single HTML component for the day headers for better alignment
-    day_headers_html = '<div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 10px; margin-bottom: 15px;">'
+    day_headers_html = '<div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; margin-bottom: 3px;">'
 
     for day in days:
         day_headers_html += f"""
@@ -111,7 +109,7 @@ def calendar_view_tab(df):
                 text-align: center;
                 font-weight: 600;
                 font-size: 0.95rem;
-                padding: 10px 0;
+                padding: 6px 0;
                 background-color: rgba(60, 90, 150, 0.25);
                 border-radius: 8px;
                 color: rgba(255, 255, 255, 0.9);
@@ -123,12 +121,12 @@ def calendar_view_tab(df):
 
     day_headers_html += "</div>"
 
-    st.components.v1.html(day_headers_html, height=60)
+    st.components.v1.html(day_headers_html, height=45)  # Reduced height from 60 to 45
 
     # Create calendar grid with CSS Grid for better alignment
     for week in cal:
         # Create a single grid for the entire week
-        week_html = '<div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 10px; margin-bottom: 10px;">'
+        week_html = '<div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; margin-bottom: 0px;">'
 
         for day in week:
             if day != 0:
@@ -152,46 +150,46 @@ def calendar_view_tab(df):
                 week_html += f"""
                 <div style="
                     border: 1px solid {border_color};
-                    padding: 15px;
+                    padding: 8px;
                     border-radius: 10px;
                     background-color: {bg_color};
-                    min-height: 130px;
+                    min-height: 90px;
                     box-shadow: {shadow};
                     transition: all 0.3s ease;
                     cursor: default;
                     display: flex;
                     flex-direction: column;
                 "
-                onmouseover="this.style.boxShadow='0 8px 20px rgba(0, 0, 0, 0.25)'; this.style.transform='translateY(-4px)';"
+                onmouseover="this.style.boxShadow='0 8px 20px rgba(0, 0, 0, 0.25)'; this.style.transform='translateY(-2px)';"
                 onmouseout="this.style.boxShadow='{shadow}'; this.style.transform='translateY(0)';"
                 >
                     <div style="
                         font-weight: 600;
-                        font-size: 1.2em;
-                        padding: 4px 8px;
+                        font-size: 1.1em;
+                        padding: 2px 6px;
                         background-color: rgba(40, 50, 70, 0.4);
                         border-radius: 6px;
                         color: rgba(255, 255, 255, 0.9);
                         text-align: center;
-                        margin-bottom: 12px;
+                        margin-bottom: 8px;
                     ">{day}</div>
                     
                     <div style="
                         display: flex;
                         flex-direction: column;
-                        gap: 8px;
+                        gap: 4px;
                         margin-top: auto;
                     ">
                         <div style="
                             color: #5e9df5;
-                            font-size: 1.1em;
+                            font-size: 1em;
                             font-weight: 500;
                             text-align: center;
                             display: flex;
                             align-items: center;
                             justify-content: center;
                         ">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16" style="margin-right: 5px;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" viewBox="0 0 16 16" style="margin-right: 3px;">
                                 <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/>
                                 <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/>
                             </svg>
@@ -203,13 +201,13 @@ def calendar_view_tab(df):
                             -webkit-background-clip: text;
                             -webkit-text-fill-color: transparent;
                             font-weight: 600;
-                            font-size: 1.05em;
+                            font-size: 0.95em;
                             text-align: center;
                             display: flex;
                             align-items: center;
                             justify-content: center;
                         ">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="#34d578" viewBox="0 0 16 16" style="margin-right: 5px;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#34d578" viewBox="0 0 16 16" style="margin-right: 3px;">
                                 <path d="M4 10.781c.148 1.667 1.513 2.85 3.591 3.003V15h1.043v-1.216c2.27-.179 3.678-1.438 3.678-3.3 0-1.59-.947-2.51-2.956-3.028l-.722-.187V3.467c1.122.11 1.879.714 2.07 1.616h1.47c-.166-1.6-1.54-2.748-3.54-2.875V1H7.591v1.233c-1.939.23-3.27 1.472-3.27 3.156 0 1.454.966 2.483 2.661 2.917l.61.162v4.031c-1.149-.17-1.94-.8-2.131-1.718H4zm3.391-3.836c-1.043-.263-1.6-.825-1.6-1.616 0-.944.704-1.641 1.8-1.828v3.495l-.2-.05zm1.591 1.872c1.287.323 1.852.859 1.852 1.769 0 1.097-.826 1.828-2.2 1.939V8.73l.348.086z"/>
                             </svg>
                             ${earnings:.2f}
@@ -222,10 +220,10 @@ def calendar_view_tab(df):
                 week_html += """
                 <div style="
                     border: 1px solid rgba(50, 50, 50, 0.2);
-                    padding: 15px;
+                    padding: 8px;
                     border-radius: 10px;
                     background-color: rgba(20, 25, 35, 0.3);
-                    min-height: 130px;
+                    min-height: 90px;
                     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
                 ">
                 </div>
@@ -234,7 +232,7 @@ def calendar_view_tab(df):
         week_html += "</div>"
 
         # Render the entire week grid as one component
-        st.components.v1.html(week_html, height=180)
+        st.components.v1.html(week_html, height=120)  # Reduced height from 180 to 120
 
     # Close the calendar container
     st.markdown("</div>", unsafe_allow_html=True)
