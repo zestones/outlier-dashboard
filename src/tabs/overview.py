@@ -31,22 +31,6 @@ def enhanced_date_selector(df):
     """Enhanced date selector with modern design and quick presets."""
     min_date, max_date = get_date_range(df)
 
-    # Container for date selection
-    date_container = st.container()
-    date_container.markdown(
-        """
-        <div style="background: linear-gradient(to right, rgba(41, 52, 98, 0.6), rgba(30, 34, 44, 0.5)); 
-                    padding: 18px 24px; 
-                    border-radius: 12px; 
-                    border-left: 4px solid rgba(79, 134, 247, 0.8); 
-                    margin-bottom: 20px;
-                    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
-            <h3 style="margin: 0; font-weight: 500; color: #f0f0f0; font-size: 1.2rem;">Date Range Selection</h3>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
-
     # Initialize session state for date inputs
     if "start_date" not in st.session_state:
         st.session_state["start_date"] = min_date
@@ -54,7 +38,7 @@ def enhanced_date_selector(df):
         st.session_state["end_date"] = max_date
 
     # Create a clean layout for preset buttons
-    preset_container = date_container.container()
+    preset_container = st.container()
     preset_container.markdown(
         "<p style='margin-bottom: 8px; font-size: 0.9rem; color: #b0b0b0;'>Quick Presets</p>",
         unsafe_allow_html=True,
@@ -127,7 +111,7 @@ def enhanced_date_selector(df):
         st.session_state["end_date"] = max_date
 
     # Date input fields with improved styling
-    input_container = date_container.container()
+    input_container = preset_container.container()
     date_cols = input_container.columns([1, 1])
 
     # Custom styling for date inputs
@@ -167,7 +151,7 @@ def enhanced_date_selector(df):
     total_days = (end_date - start_date).days + 1
     active_days = filtered_df["workDate"].nunique()
 
-    date_container.markdown(
+    preset_container.markdown(
         f"""
         <div style="display: flex; justify-content: space-between; 
                     padding: 12px 16px; 
